@@ -1,0 +1,27 @@
+- hosts: all
+  become: True
+  tasks:
+    - name: DNSを近いところに差し替え
+      replace:
+        path: /etc/systemd/resolved.conf
+        regexp: "^DNS=.*$"
+        replace: "DNS=10.0.0.1 10.16.0.2"
+    - name: リゾルバの再起動
+      systemd:
+        name: systemd-resolved.service
+        state: restarted
+
+    - name: リポジトリを日本に差し替え
+      replace:
+        path: /etc/apt/sources.list
+        regexp: "us.archive"
+        replace: "jp.archive"
+    - name: リポジトリの更新
+      apt:
+        update_cache: True
+
+    - name: install sl
+      apt:
+        name: sl
+        
+
