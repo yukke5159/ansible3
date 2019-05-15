@@ -4,7 +4,5 @@
     path: /etc/systemd/resolved.conf
     regexp: "^DNS=.*$"
     replace: "DNS=10.0.0.1 10.16.0.2"
-- name: リゾルバの再起動
-  systemd:
-    name: systemd-resolved.service
-    state: restarted
+  notify:
+    - リゾルバの再起動

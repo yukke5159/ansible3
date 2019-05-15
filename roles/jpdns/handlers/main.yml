@@ -1,0 +1,4 @@
+- name: リゾルバの再起動
+  systemd:
+    name: systemd-resolved.service
+    state: restarted
