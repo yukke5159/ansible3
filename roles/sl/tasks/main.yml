@@ -1,0 +1,4 @@
+---
+- name: install sl
+  apt:
+    name: sl
